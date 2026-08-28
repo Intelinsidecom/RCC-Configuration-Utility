@@ -40,12 +40,10 @@ namespace RCCConfigurator
             {
                 if (P.IsOS64Bit())
                 {
-                    Console.WriteLine("Editing AccessKey Setting (X64)");
-                    Console.WriteLine(" ");
+                    Console.WriteLine("Editing AccessKey Setting (X64):");
                     P.EditRegistryString(P.RCC64RegeditDir, P.AccessKeyName, P.AccessKey); // it seems to read from 64 node only
                 }
-                Console.WriteLine("Editing AccessKey Setting");
-                Console.WriteLine(" ");
+                Console.WriteLine("Editing AccessKey Setting:");
                 P.EditRegistryString(P.RCC32RegeditDir, P.AccessKeyName, P.AccessKey);
             }
             Console.WriteLine("    "); // keep some space
@@ -55,15 +53,25 @@ namespace RCCConfigurator
             {
                 if (P.IsOS64Bit())
                 {
-                    Console.WriteLine("Editing SettingsKey Setting (X64)");
-                    Console.WriteLine(" ");
+                    Console.WriteLine("Editing SettingsKey Setting (X64):");
                     P.EditRegistryString(P.RCC64RegeditDir, P.SettingsKeyName, P.SettingsKey); // it seems to read from 64 node only
                 }
 
-                Console.WriteLine("Editing SettingsKey Setting");
-                Console.WriteLine(" ");
+                Console.WriteLine("Editing SettingsKey Setting:");
+                
                 P.EditRegistryString(P.RCC32RegeditDir, P.SettingsKeyName, P.SettingsKey);
             }
+            Console.WriteLine(" ");
+            Console.WriteLine("Task successful, press Enter to quit or anything else to rerun again");
+            var confirm = Console.ReadKey().Key;
+            
+            if (confirm != ConsoleKey.Enter)
+            {
+                string[] test = new string[1] {""};
+                Console.Clear();
+                Program.Main(test);
+            }
+            Environment.Exit(0);
 
         }
 
