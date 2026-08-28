@@ -32,6 +32,8 @@ namespace RCCConfigurator
             if (!P.isElevated)
             {
                 Console.WriteLine("The application utilizes administrator privilieges for editing the registry keys and cannot execute the task without them.");
+                Console.WriteLine("Press Any Key to exit");
+                var exit = Console.ReadKey().Key;
                 Environment.Exit(0);
             }
             Console.WriteLine("Which value would you like to set AccessKey to? (appended to every http request like ?AccessKey= by RCC Binary");
@@ -94,13 +96,7 @@ namespace RCCConfigurator
 
                 if (key == null)
                 {
-                    if (PrintAnything)
-                    {
-                        Console.WriteLine(
-                            "Key not found: HKLM\\" + location);
-                        Console.WriteLine(" ");
-                    }
-                    return;
+                    key = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(location);
                 }
 
                 key.SetValue(
